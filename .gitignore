@@ -3,5 +3,5 @@
 *.jpg
 
 # Folders
-/[Bb]uilds/
-/[Jj]uceLibraryCode/
+/Builds/
+/JuceLibraryCode/
