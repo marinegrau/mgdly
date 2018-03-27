@@ -69,7 +69,7 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    double getParameter (int index) override;
+    float getParameter (int index) override;
     void setParameter (int index, float newValue) override;
     const String getParameterName (int index) override;
     const String getParameterText (int index) override;

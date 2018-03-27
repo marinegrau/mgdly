@@ -455,9 +455,9 @@ void TheDelayAudioProcessorEditor::textEditorFocusLost(TextEditor &t){
 
 
 void TheDelayAudioProcessorEditor::incDecDelay(double samples, int incDec) {
-    int factor;
-    double currentDelay;
-    double newDelay;
+    int factor = 0;                 // shouldn't matter if not initialized
+    double currentDelay = 0;        // shouldn't matter if not initialized
+    double newDelay = 0;            // shouldn't matter if not initialized
     // Determining whether the delay should be increased or decreased
     switch (incDec) {
         case plusMinus::inc:
@@ -473,6 +473,7 @@ void TheDelayAudioProcessorEditor::incDecDelay(double samples, int incDec) {
     
     currentDelay = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
     newDelay = currentDelay + samples * factor;
+    newDelay = round(newDelay);                 // fixed the "Samples on ms up down" issue
     setDelayTime(newDelay);
     //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, newDelay);
 }
