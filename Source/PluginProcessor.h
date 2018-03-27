@@ -69,7 +69,7 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    float getParameter (int index) override;
+    double getParameter (int index) override;
     void setParameter (int index, float newValue) override;
     const String getParameterName (int index) override;
     const String getParameterText (int index) override;
@@ -79,13 +79,13 @@ public:
    
     String trackname;
     double sampleRate;
-    float delayLength;
-    float addTimeToDelay;
+    double delayLength;
+    double addTimeToDelay;
     int delayBufferLength;
     timeUnits currentTimeSetting;
     timeUnits getCurrentTimeSetting();
     void setCurrentTimeSetting(timeUnits unit);
-    void setDelayTime(float delayTime, timeUnits unit);
+    void setDelayTime(double delayTime, timeUnits unit);
 
 private:
     // circular buffer variables

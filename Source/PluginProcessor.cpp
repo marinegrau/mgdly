@@ -64,7 +64,7 @@ TheDelayAudioProcessor::~TheDelayAudioProcessor()
 
 //==============================================================================
 
-float TheDelayAudioProcessor::getParameter(int index)
+double TheDelayAudioProcessor::getParameter(int index)
 {
     switch(index) {
         case delayLengthParam:
@@ -78,7 +78,7 @@ float TheDelayAudioProcessor::getParameter(int index)
             
     }
 }
-void TheDelayAudioProcessor::setParameter (int index, float newValue)
+void TheDelayAudioProcessor::setParameter (int index, double newValue)
 {
     switch (index) {
 
