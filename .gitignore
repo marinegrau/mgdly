@@ -1,6 +1,7 @@
 # Mac
 .DS_Store
+.jpg
 
 # Folders
-/[Bb]uilds
-/[Jj]uceLibraryCode
+/[Bb]uilds/
+/[Jj]uceLibraryCode/
