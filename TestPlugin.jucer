@@ -27,9 +27,9 @@
     <XCODE_MAC targetFolder="Builds/MacOSX" vst3Folder="" rtasFolder="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" enablePluginBinaryCopyStep="1" isDebug="1" optimisation="1"
-                       linkTimeOptimisation="0" targetName="TestPlugin"/>
+                       linkTimeOptimisation="0" targetName="TheDelay"/>
         <CONFIGURATION name="Release" enablePluginBinaryCopyStep="1" isDebug="0" optimisation="3"
-                       linkTimeOptimisation="1" targetName="TestPlugin"/>
+                       linkTimeOptimisation="1" targetName="TheDelay"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../../../Applications/JUCE/modules"/>
