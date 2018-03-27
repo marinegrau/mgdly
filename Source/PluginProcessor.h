@@ -15,12 +15,12 @@
 //==============================================================================
 /**
 */
-class TestPluginAudioProcessor  : public AudioProcessor
+class TheDelayAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    TestPluginAudioProcessor();
-    ~TestPluginAudioProcessor();
+    TheDelayAudioProcessor();
+    ~TheDelayAudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -94,5 +94,5 @@ private:
     int delayWritePosition;
     
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TestPluginAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TheDelayAudioProcessor)
 };

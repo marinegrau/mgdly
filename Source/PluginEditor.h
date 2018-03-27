@@ -16,15 +16,15 @@
 //==============================================================================
 /**
 */
-class TestPluginAudioProcessorEditor  : public AudioProcessorEditor,
+class TheDelayAudioProcessorEditor  : public AudioProcessorEditor,
                                         private Slider::Listener,
                                         private Button::Listener,
                                         private Label::Listener,
                                         private TextEditor::Listener
 {
 public:
-    TestPluginAudioProcessorEditor (TestPluginAudioProcessor&);
-    ~TestPluginAudioProcessorEditor();
+    TheDelayAudioProcessorEditor (TheDelayAudioProcessor&);
+    ~TheDelayAudioProcessorEditor();
 
     //==============================================================================
     void paint (Graphics&) override;
@@ -48,7 +48,7 @@ private:
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    TestPluginAudioProcessor& processor;
+    TheDelayAudioProcessor& processor;
     
     TextButton incDelayMin;     // increase delay by minimum value
     TextButton decDelayMin;     // decrease delay by minimum value
@@ -89,7 +89,7 @@ private:
     void textEditorReturnKeyPressed(TextEditor &t) override;
     void textEditorEscapeKeyPressed(TextEditor &t) override;
     void textEditorFocusLost (TextEditor &t) override;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TestPluginAudioProcessorEditor);
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TheDelayAudioProcessorEditor);
     
     
     

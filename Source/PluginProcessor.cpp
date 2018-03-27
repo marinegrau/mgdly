@@ -12,7 +12,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-TestPluginAudioProcessor::TestPluginAudioProcessor()
+TheDelayAudioProcessor::TheDelayAudioProcessor()
 
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -37,7 +37,7 @@ TestPluginAudioProcessor::TestPluginAudioProcessor()
 
 //==============================================================================
 
-/*TestPluginAudioProcessor::TestPluginAudioProcessor()
+/*TheDelayAudioProcessor::TheDelayAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -58,13 +58,13 @@ TestPluginAudioProcessor::TestPluginAudioProcessor()
 */
 
 
-TestPluginAudioProcessor::~TestPluginAudioProcessor()
+TheDelayAudioProcessor::~TheDelayAudioProcessor()
 {
 }
 
 //==============================================================================
 
-float TestPluginAudioProcessor::getParameter(int index)
+float TheDelayAudioProcessor::getParameter(int index)
 {
     switch(index) {
         case delayLengthParam:
@@ -78,7 +78,7 @@ float TestPluginAudioProcessor::getParameter(int index)
             
     }
 }
-void TestPluginAudioProcessor::setParameter (int index, float newValue)
+void TheDelayAudioProcessor::setParameter (int index, float newValue)
 {
     switch (index) {
 
@@ -98,13 +98,13 @@ void TestPluginAudioProcessor::setParameter (int index, float newValue)
         case timeUnitParam:
             int index2 = (int) newValue;
             switch (index2) {
-                case TestPluginAudioProcessor::timeUnits::samples:
+                case TheDelayAudioProcessor::timeUnits::samples:
                     currentTimeSetting = timeUnits::samples;
                     break;
-                case TestPluginAudioProcessor::timeUnits::ms:
+                case TheDelayAudioProcessor::timeUnits::ms:
                     currentTimeSetting = timeUnits::ms;
                     break;
-                case TestPluginAudioProcessor::timeUnits::meter:
+                case TheDelayAudioProcessor::timeUnits::meter:
                     currentTimeSetting= timeUnits::meter;
                     break;
                 default:
@@ -114,23 +114,23 @@ void TestPluginAudioProcessor::setParameter (int index, float newValue)
     }
 }
 
-String TestPluginAudioProcessor::getTrackName()
+String TheDelayAudioProcessor::getTrackName()
 {
-    //String name = &TestPluginAudioProcessor::TrackProperties::name; conversion error -.- TODO
+    //String name = &TheDelayAudioProcessor::TrackProperties::name; conversion error -.- TODO
     return "name";
 
 }
 
-void TestPluginAudioProcessor::setCurrentTimeSetting(TestPluginAudioProcessor::timeUnits unit)
+void TheDelayAudioProcessor::setCurrentTimeSetting(TheDelayAudioProcessor::timeUnits unit)
 {
     currentTimeSetting = unit;
 }
 
-TestPluginAudioProcessor::timeUnits TestPluginAudioProcessor::getCurrentTimeSetting(){
+TheDelayAudioProcessor::timeUnits TheDelayAudioProcessor::getCurrentTimeSetting(){
     return currentTimeSetting;
 }
 
-const String TestPluginAudioProcessor::getParameterName (int index)
+const String TheDelayAudioProcessor::getParameterName (int index)
 {
     switch (index) {
         case delayLengthParam:
@@ -142,24 +142,24 @@ const String TestPluginAudioProcessor::getParameterName (int index)
     }
 }
 
-int TestPluginAudioProcessor::getDelayBufferLength()
+int TheDelayAudioProcessor::getDelayBufferLength()
 {
-    return TestPluginAudioProcessor::delayBufferLength;
+    return TheDelayAudioProcessor::delayBufferLength;
 }
 
 
 
-const String TestPluginAudioProcessor::getParameterText (int index)
+const String TheDelayAudioProcessor::getParameterText (int index)
 {
     return String();
 }
 
-const String TestPluginAudioProcessor::getName() const
+const String TheDelayAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool TestPluginAudioProcessor::acceptsMidi() const
+bool TheDelayAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -168,7 +168,7 @@ bool TestPluginAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool TestPluginAudioProcessor::producesMidi() const
+bool TheDelayAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -177,7 +177,7 @@ bool TestPluginAudioProcessor::producesMidi() const
    #endif
 }
 
-bool TestPluginAudioProcessor::isMidiEffect() const
+bool TheDelayAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -186,39 +186,39 @@ bool TestPluginAudioProcessor::isMidiEffect() const
    #endif
 }
 
-double TestPluginAudioProcessor::getTailLengthSeconds() const
+double TheDelayAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int TestPluginAudioProcessor::getNumPrograms()
+int TheDelayAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int TestPluginAudioProcessor::getCurrentProgram()
+int TheDelayAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void TestPluginAudioProcessor::setCurrentProgram (int index)
+void TheDelayAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const String TestPluginAudioProcessor::getProgramName (int index)
+const String TheDelayAudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void TestPluginAudioProcessor::changeProgramName (int index, const String& newName)
+void TheDelayAudioProcessor::changeProgramName (int index, const String& newName)
 {
 }
 
 //==============================================================================
-void TestPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void TheDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    TestPluginAudioProcessor::sampleRate = sampleRate;
+    TheDelayAudioProcessor::sampleRate = sampleRate;
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     delayBufferLength  = (int) 2.0 * sampleRate;        // 2 seconds delay Buffer
@@ -231,14 +231,14 @@ void TestPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     delayReadPosition = (int) (delayWritePosition - (delayLength) + delayBufferLength) % delayBufferLength;     // TODO -1 seems to solve it. test.
 }
 
-void TestPluginAudioProcessor::releaseResources()
+void TheDelayAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool TestPluginAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool TheDelayAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     ignoreUnused (layouts);
@@ -261,7 +261,7 @@ bool TestPluginAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 }
 #endif
 
-void TestPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
+void TheDelayAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     
      // This code block deals with the Audio buffer, which is not needed for this project.
@@ -331,25 +331,25 @@ void TestPluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuff
 
 
 //==============================================================================
-bool TestPluginAudioProcessor::hasEditor() const
+bool TheDelayAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-AudioProcessorEditor* TestPluginAudioProcessor::createEditor()
+AudioProcessorEditor* TheDelayAudioProcessor::createEditor()
 {
-    return new TestPluginAudioProcessorEditor (*this);
+    return new TheDelayAudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void TestPluginAudioProcessor::getStateInformation (MemoryBlock& destData)
+void TheDelayAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void TestPluginAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void TheDelayAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -359,5 +359,5 @@ void TestPluginAudioProcessor::setStateInformation (const void* data, int sizeIn
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new TestPluginAudioProcessor();
+    return new TheDelayAudioProcessor();
 }

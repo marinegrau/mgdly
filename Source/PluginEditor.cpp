@@ -13,7 +13,7 @@
 
 
 //==============================================================================
-TestPluginAudioProcessorEditor::TestPluginAudioProcessorEditor (TestPluginAudioProcessor& p)
+TheDelayAudioProcessorEditor::TheDelayAudioProcessorEditor (TheDelayAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
     // Make sure that before the constructor has finished, you've set the
@@ -83,26 +83,26 @@ TestPluginAudioProcessorEditor::TestPluginAudioProcessorEditor (TestPluginAudioP
 //    trackNameLabel.setBounds(20, 10, 300, 40);
 //    trackNameLabel.setText("This is the trackname", dontSendNotification);
 //    trackNameLabel.setEditable(false, false);
-//    trackNameLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+//    trackNameLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     
     samplesTextLabel.setText("samples", dontSendNotification);
     samplesTextLabel.setBounds(125, 40, 100, 40);
-    samplesTextLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+    samplesTextLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     
     msTextLabel.setText("milliseconds", dontSendNotification);
     msTextLabel.setBounds(125, 90, 100, 40);
-    msTextLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+    msTextLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     
     meterTextLabel.setText("meter", dontSendNotification);
     meterTextLabel.setBounds(125, 140, 100, 40);
-    meterTextLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+    meterTextLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     
     samplesLabel.setName("samplesLabel");
     samplesLabel.setBounds(20, 40, 100, 40);
     samplesLabel.setEditable(false, true);  // Not editable on a single click. But editable on a double click
     samplesLabel.addListener(this);
     samplesLabel.addMouseListener(this, false);
-    samplesLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+    samplesLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     samplesLabel.setJustificationType(juce::Justification::centredRight);
     
     msLabel.setName("msLabel");
@@ -110,7 +110,7 @@ TestPluginAudioProcessorEditor::TestPluginAudioProcessorEditor (TestPluginAudioP
     msLabel.setEditable(false, true);       // Not editable on a single click. But editable on a double click
     msLabel.addListener(this);
     msLabel.addMouseListener(this, false);
-    msLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+    msLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     msLabel.setJustificationType(juce::Justification::centredRight);
 
 
@@ -119,7 +119,7 @@ TestPluginAudioProcessorEditor::TestPluginAudioProcessorEditor (TestPluginAudioP
     meterLabel.setEditable(false, true);       // Not editable on a single click. But editable on a double click
     meterLabel.addListener(this);
     meterLabel.addMouseListener(this, false);
-    meterLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+    meterLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     meterLabel.setJustificationType(juce::Justification::centredRight);
 
     //Filling the Labels with Text and setting colour
@@ -147,12 +147,12 @@ TestPluginAudioProcessorEditor::TestPluginAudioProcessorEditor (TestPluginAudioP
     addAndMakeVisible(meterTextLabel);
 }
 
-TestPluginAudioProcessorEditor::~TestPluginAudioProcessorEditor()
+TheDelayAudioProcessorEditor::~TheDelayAudioProcessorEditor()
 {
 }
 
 
-void TestPluginAudioProcessorEditor::paint (Graphics& g)
+void TheDelayAudioProcessorEditor::paint (Graphics& g)
 {
 
     // (Our component is opaque, so we must completely fill the background with a solid colour)
@@ -164,7 +164,7 @@ void TestPluginAudioProcessorEditor::paint (Graphics& g)
 
 }
 
-void TestPluginAudioProcessorEditor::resized()
+void TheDelayAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
@@ -173,12 +173,12 @@ void TestPluginAudioProcessorEditor::resized()
     midiVolume.setBounds(40, 30, 20, getHeight() - 60);
 }
 
-void TestPluginAudioProcessorEditor::sliderValueChanged(Slider* slider)
+void TheDelayAudioProcessorEditor::sliderValueChanged(Slider* slider)
 {
 }
 
 
-bool TestPluginAudioProcessorEditor::isFloat(String text){
+bool TheDelayAudioProcessorEditor::isFloat(String text){
     text = text.replaceCharacter(',', '.');
     // Check if there aren't any non number characters and there is not more than 1 dot
     bool isFloat = ((text.toStdString().find_first_not_of( "0123456789." ) == std::string::npos) &&
@@ -188,7 +188,7 @@ bool TestPluginAudioProcessorEditor::isFloat(String text){
 }
 
 
-int TestPluginAudioProcessorEditor::countCharOccurencesInString(String str, char a)
+int TheDelayAudioProcessorEditor::countCharOccurencesInString(String str, char a)
 {
     char checkCharacter = a;
     int count = 0;
@@ -204,18 +204,18 @@ int TestPluginAudioProcessorEditor::countCharOccurencesInString(String str, char
 
 
 
-void TestPluginAudioProcessorEditor::labelTextChanged(Label* label)
+void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
 {
     int sampleRate = getAudioProcessor()->getSampleRate();
     if(label == &msLabel){
         float delayTime = 0.0;
         String text = msLabel.getText();
-        bool isFloat = TestPluginAudioProcessorEditor::isFloat(text);
+        bool isFloat = TheDelayAudioProcessorEditor::isFloat(text);
         
         if (isFloat) {  // IF TEXT IS A VALID ENTRY
             delayTime = std::stof(text.toStdString()); // set Delaytime to the entered number
             setDelayTime(delayTime * sampleRate / 1000);
-            //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000);
+            //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000);
         }
         updateLabels();
 
@@ -229,7 +229,7 @@ void TestPluginAudioProcessorEditor::labelTextChanged(Label* label)
         if (isFloat) {
             delayTime = std::stof(text.toStdString());
             setDelayTime(delayTime);
-            //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::delayLengthParam, delayTime);
+            //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime);
         }
         updateLabels();
         
@@ -238,13 +238,13 @@ void TestPluginAudioProcessorEditor::labelTextChanged(Label* label)
     if(label == &meterLabel){
         float delayTime = 0.0;
         String text = meterLabel.getText();
-        bool isFloat = TestPluginAudioProcessorEditor::isFloat(text);
+        bool isFloat = TheDelayAudioProcessorEditor::isFloat(text);
         // IF ENTERED TEXT IS VALID
         if (isFloat)
         {
             delayTime = std::stof(text.toStdString());
             setDelayTime(delayTime * sampleRate / 1000 * (100/343));
-            //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000 * (100/343));
+            //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000 * (100/343));
         }
         updateLabels();
         
@@ -252,9 +252,9 @@ void TestPluginAudioProcessorEditor::labelTextChanged(Label* label)
 
     
 }
-void TestPluginAudioProcessorEditor::updateLabels(){
+void TheDelayAudioProcessorEditor::updateLabels(){
     int sampleRate = getAudioProcessor()->getSampleRate();
-    float delayInSamples = round(getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::delayLengthParam));
+    float delayInSamples = round(getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam));
     float delayInMs = delayInSamples * 1000 / sampleRate;
     delayInMs = round(delayInMs * 10)/10; // round to 0.1
     float delayInMeters = delayInMs * 0.343;
@@ -268,7 +268,7 @@ void TestPluginAudioProcessorEditor::updateLabels(){
 
 
 
-void TestPluginAudioProcessorEditor::buttonClicked(Button* button)
+void TheDelayAudioProcessorEditor::buttonClicked(Button* button)
 {
 //switch on button
     
@@ -325,20 +325,20 @@ void TestPluginAudioProcessorEditor::buttonClicked(Button* button)
 }
 
 
-void TestPluginAudioProcessorEditor::updateTimeLabelColours(){
-    int param = getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::timeUnitParam);
+void TheDelayAudioProcessorEditor::updateTimeLabelColours(){
+    int param = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::timeUnitParam);
     switch (param) {
-        case TestPluginAudioProcessor::timeUnits::samples:
+        case TheDelayAudioProcessor::timeUnits::samples:
             samplesLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGselected);
             msLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGdeselected);
             meterLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGdeselected);
             break;
-        case TestPluginAudioProcessor::timeUnits::ms:
+        case TheDelayAudioProcessor::timeUnits::ms:
             samplesLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGdeselected);
             msLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGselected);
             meterLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGdeselected);
             break;
-        case TestPluginAudioProcessor::timeUnits::meter:
+        case TheDelayAudioProcessor::timeUnits::meter:
             samplesLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGdeselected);
             msLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGdeselected);
             meterLabel.setColour(juce::Label::ColourIds::backgroundColourId, labelBGselected);
@@ -349,58 +349,58 @@ void TestPluginAudioProcessorEditor::updateTimeLabelColours(){
     
 }
 // =========================== BEHAVIOUR FOR LABEL BUTTONS
-void TestPluginAudioProcessorEditor::mouseDown(const MouseEvent& e){
+void TheDelayAudioProcessorEditor::mouseDown(const MouseEvent& e){
     // Setting the timeUnit corresponding to the selected Label
     if (e.eventComponent->getName() == samplesLabel.getName()){
-        getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::timeUnitParam, TestPluginAudioProcessor::timeUnits::samples);
+        getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::timeUnitParam, TheDelayAudioProcessor::timeUnits::samples);
     }
     if (e.eventComponent->getName() == msLabel.getName()){
-        getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::timeUnitParam, TestPluginAudioProcessor::timeUnits::ms);
+        getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::timeUnitParam, TheDelayAudioProcessor::timeUnits::ms);
     }
     if (e.eventComponent->getName() == meterLabel.getName()){
-        getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::timeUnitParam, TestPluginAudioProcessor::timeUnits::meter);
+        getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::timeUnitParam, TheDelayAudioProcessor::timeUnits::meter);
     }
     
     // Set Colours
     updateTimeLabelColours();
 
 }
-void TestPluginAudioProcessorEditor::mouseEnter(const MouseEvent& e){
+void TheDelayAudioProcessorEditor::mouseEnter(const MouseEvent& e){
     if (e.eventComponent->getName() == samplesLabel.getName()){
-        samplesLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColourMouseOver);
+        samplesLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColourMouseOver);
         
     }
     if (e.eventComponent->getName() == msLabel.getName()){
-        msLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColourMouseOver);
+        msLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColourMouseOver);
 
     }
     if (e.eventComponent->getName() == meterLabel.getName()){
-        meterLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColourMouseOver);
+        meterLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColourMouseOver);
 
     }
 }
-void TestPluginAudioProcessorEditor::mouseExit(const MouseEvent& e){
+void TheDelayAudioProcessorEditor::mouseExit(const MouseEvent& e){
     if (e.eventComponent->getName() == samplesLabel.getName()){
-        samplesLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+        samplesLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
 
     }
     if (e.eventComponent->getName() == msLabel.getName()){
-        msLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+        msLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
 
     }
     if (e.eventComponent->getName() == meterLabel.getName()){
-        meterLabel.setColour(juce::Label::ColourIds::textColourId, TestPluginAudioProcessorEditor::labelTextColour);
+        meterLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
 
     }
 }
 
-void TestPluginAudioProcessorEditor::textEditorReturnKeyPressed(TextEditor &t){
+void TheDelayAudioProcessorEditor::textEditorReturnKeyPressed(TextEditor &t){
     float addTime;
-    float oldDelay = getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::delayLengthParam);
-    //float addTime = getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::addTime);
+    float oldDelay = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
+    //float addTime = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::addTime);
     String text;
     text = addDelayEditor.getText();
-    bool isFloat = TestPluginAudioProcessorEditor::isFloat(text);
+    bool isFloat = TheDelayAudioProcessorEditor::isFloat(text);
     if (isFloat)
         addTime = std::stof(text.toStdString());
         
@@ -414,17 +414,17 @@ void TestPluginAudioProcessorEditor::textEditorReturnKeyPressed(TextEditor &t){
     
     
     //=======
-    int unit = getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::timeUnitParam);
+    int unit = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::timeUnitParam);
     int addDelayInSamples;
     double sampleRate = getAudioProcessor()->getSampleRate();
     switch (unit) {
-        case TestPluginAudioProcessor::timeUnits::samples:
+        case TheDelayAudioProcessor::timeUnits::samples:
             addDelayInSamples = addTime;
             break;
-        case TestPluginAudioProcessor::timeUnits::ms:
+        case TheDelayAudioProcessor::timeUnits::ms:
             addDelayInSamples = round(addTime * sampleRate / 1000);
             break;
-        case TestPluginAudioProcessor::timeUnits::meter:
+        case TheDelayAudioProcessor::timeUnits::meter:
             addDelayInSamples = round(addTime * sampleRate / 1000 * 0.2915451895 * 10);
             break;
             //default:
@@ -435,26 +435,26 @@ void TestPluginAudioProcessorEditor::textEditorReturnKeyPressed(TextEditor &t){
     
     int newDelayInsamples = oldDelay + addDelayInSamples;
     setDelayTime(newDelayInsamples);
-    //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::delayLengthParam, newDelayInsamples);
+    //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, newDelayInsamples);
     addDelayEditor.setVisible(false);
     updateLabels();
 }
 
-void TestPluginAudioProcessorEditor::textEditorEscapeKeyPressed(TextEditor &t){
-    //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::addTime, 0.0);
+void TheDelayAudioProcessorEditor::textEditorEscapeKeyPressed(TextEditor &t){
+    //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::addTime, 0.0);
     addDelayEditor.setVisible(false);
     addDelayEditor.setText("");
 
 }
 
-void TestPluginAudioProcessorEditor::textEditorFocusLost(TextEditor &t){
-    //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::addTime, 0.0);
+void TheDelayAudioProcessorEditor::textEditorFocusLost(TextEditor &t){
+    //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::addTime, 0.0);
     addDelayEditor.setVisible(false);
     addDelayEditor.setText("");
 }
 
 
-void TestPluginAudioProcessorEditor::incDecDelay(float samples, int incDec) {
+void TheDelayAudioProcessorEditor::incDecDelay(float samples, int incDec) {
     int factor;
     float currentDelay;
     float newDelay;
@@ -471,26 +471,26 @@ void TestPluginAudioProcessorEditor::incDecDelay(float samples, int incDec) {
             break;
     }
     
-    currentDelay = getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::delayLengthParam);
+    currentDelay = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
     newDelay = currentDelay + samples * factor;
     setDelayTime(newDelay);
-    //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::delayLengthParam, newDelay);
+    //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, newDelay);
 }
 
 // ===================== HELPER == FUNCTIONS =======================
 /// converts from samples, ms and meters to samples
-float TestPluginAudioProcessorEditor::convertToSamples(int unit, float value)
+float TheDelayAudioProcessorEditor::convertToSamples(int unit, float value)
 {
     float delayInSamples;
     float sampleRate = (float) getAudioProcessor()->getSampleRate();
     switch (unit) {
-        case TestPluginAudioProcessor::timeUnits::samples:
+        case TheDelayAudioProcessor::timeUnits::samples:
             delayInSamples = roundf(value);
             break;
-        case TestPluginAudioProcessor::timeUnits::ms:
+        case TheDelayAudioProcessor::timeUnits::ms:
             delayInSamples = value * sampleRate / 1000;
             break;
-        case TestPluginAudioProcessor::timeUnits::meter:
+        case TheDelayAudioProcessor::timeUnits::meter:
             delayInSamples = value * sampleRate / 343;
             break;
         default:
@@ -499,24 +499,24 @@ float TestPluginAudioProcessorEditor::convertToSamples(int unit, float value)
     return delayInSamples;
 }
 
-int TestPluginAudioProcessorEditor::getCurrentTimeUnit()
+int TheDelayAudioProcessorEditor::getCurrentTimeUnit()
 {
-    return getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::timeUnitParam);
+    return getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::timeUnitParam);
 }
 
-float TestPluginAudioProcessorEditor::getDelayLength()
+float TheDelayAudioProcessorEditor::getDelayLength()
 {
-    return getAudioProcessor()->getParameter(TestPluginAudioProcessor::Parameters::delayLengthParam);
+    return getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
 }
 
-void TestPluginAudioProcessorEditor::setDelayTime(int samples){
-    getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::delayLengthParam, samples);
+void TheDelayAudioProcessorEditor::setDelayTime(int samples){
+    getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, samples);
 }
 
 
-float TestPluginAudioProcessorEditor::getFactor(int unit, int strength){
+float TheDelayAudioProcessorEditor::getFactor(int unit, int strength){
     switch (unit) {
-        case TestPluginAudioProcessor::timeUnits::samples:
+        case TheDelayAudioProcessor::timeUnits::samples:
             switch (strength) {
                 case strengthEnum::min:
                     return 1;
@@ -527,7 +527,7 @@ float TestPluginAudioProcessorEditor::getFactor(int unit, int strength){
                 default:
                     return 0;
             }
-        case TestPluginAudioProcessor::timeUnits::ms:
+        case TheDelayAudioProcessor::timeUnits::ms:
             switch (strength) {
                 case strengthEnum::min:
                     return 0.1;
@@ -538,7 +538,7 @@ float TestPluginAudioProcessorEditor::getFactor(int unit, int strength){
                 default:
                     return 0;
             }
-        case TestPluginAudioProcessor::timeUnits::meter:
+        case TheDelayAudioProcessor::timeUnits::meter:
             switch (strength) {
                 case strengthEnum::min:
                     return 0.1;
