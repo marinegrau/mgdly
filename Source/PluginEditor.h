@@ -58,7 +58,7 @@ private:
     TextButton decDelayMax;
     TextButton addDelay;
     TextEditor addDelayEditor;
-    float timeToAddToDelay;
+    double timeToAddToDelay;
     /*
     TextButton msButton;
     TextButton samplesButton;
@@ -94,12 +94,12 @@ private:
     
     
     // Helper Methods
-    void incDecDelay(float samples, int incDec);
-    float convertToSamples(int unit, float value);
+    void incDecDelay(double samples, int incDec);
+    double convertToSamples(int unit, double value);
     int getCurrentTimeUnit();
-    float getDelayLength();
-    float getFactor(int unit, int strength);
-    bool isFloat(String text);
+    double getDelayLength();
+    double getFactor(int unit, int strength);
+    bool isDouble(String text);
     int countCharOccurencesInString(String string, char a);
     void setDelayTime(int samples);
     void updateTimeLabelColours();

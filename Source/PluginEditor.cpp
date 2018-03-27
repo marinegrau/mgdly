@@ -178,13 +178,13 @@ void TheDelayAudioProcessorEditor::sliderValueChanged(Slider* slider)
 }
 
 
-bool TheDelayAudioProcessorEditor::isFloat(String text){
+bool TheDelayAudioProcessorEditor::isDouble(String text){
     text = text.replaceCharacter(',', '.');
     // Check if there aren't any non number characters and there is not more than 1 dot
-    bool isFloat = ((text.toStdString().find_first_not_of( "0123456789." ) == std::string::npos) &&
+    bool isDouble = ((text.toStdString().find_first_not_of( "0123456789." ) == std::string::npos) &&
                     (countCharOccurencesInString(text, '.') <= 1));
                     
-    return isFloat;
+    return isDouble;
 }
 
 
@@ -208,11 +208,11 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
 {
     int sampleRate = getAudioProcessor()->getSampleRate();
     if(label == &msLabel){
-        float delayTime = 0.0;
+        double delayTime = 0.0;
         String text = msLabel.getText();
-        bool isFloat = TheDelayAudioProcessorEditor::isFloat(text);
+        bool isDouble = TheDelayAudioProcessorEditor::isDouble(text);
         
-        if (isFloat) {  // IF TEXT IS A VALID ENTRY
+        if (isDouble) {  // IF TEXT IS A VALID ENTRY
             delayTime = std::stof(text.toStdString()); // set Delaytime to the entered number
             setDelayTime(delayTime * sampleRate / 1000);
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000);
@@ -222,11 +222,11 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
     }
 
     if(label == &samplesLabel){
-        float delayTime = 0.0;
+        double delayTime = 0.0;
         String text = samplesLabel.getText();
-        bool isFloat = (text.toStdString().find_first_not_of( "0123456789" ) == std::string::npos);
+        bool isDouble = (text.toStdString().find_first_not_of( "0123456789" ) == std::string::npos);
         // IF ENTERED TEXT IS VALID
-        if (isFloat) {
+        if (isDouble) {
             delayTime = std::stof(text.toStdString());
             setDelayTime(delayTime);
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime);
@@ -236,11 +236,11 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
     }
 
     if(label == &meterLabel){
-        float delayTime = 0.0;
+        double delayTime = 0.0;
         String text = meterLabel.getText();
-        bool isFloat = TheDelayAudioProcessorEditor::isFloat(text);
+        bool isDouble = TheDelayAudioProcessorEditor::isDouble(text);
         // IF ENTERED TEXT IS VALID
-        if (isFloat)
+        if (isDouble)
         {
             delayTime = std::stof(text.toStdString());
             setDelayTime(delayTime * sampleRate / 1000 * (100/343));
@@ -254,10 +254,10 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
 }
 void TheDelayAudioProcessorEditor::updateLabels(){
     int sampleRate = getAudioProcessor()->getSampleRate();
-    float delayInSamples = round(getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam));
-    float delayInMs = delayInSamples * 1000 / sampleRate;
+    double delayInSamples = round(getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam));
+    double delayInMs = delayInSamples * 1000 / sampleRate;
     delayInMs = round(delayInMs * 10)/10; // round to 0.1
-    float delayInMeters = delayInMs * 0.343;
+    double delayInMeters = delayInMs * 0.343;
     delayInMeters = round(delayInMeters * 10) /10;
     samplesLabel.setText((String)delayInSamples, dontSendNotification);
     msLabel.setText((String) delayInMs, dontSendNotification);
@@ -274,16 +274,16 @@ void TheDelayAudioProcessorEditor::buttonClicked(Button* button)
     
     if (button == &incDelayMin) {
         int unit = getCurrentTimeUnit();
-        float factor = getFactor(unit, min);
-        float addDelayInSamples = convertToSamples(unit, factor);
+        double factor = getFactor(unit, min);
+        double addDelayInSamples = convertToSamples(unit, factor);
         incDecDelay(addDelayInSamples, plusMinus::inc);
         updateLabels();
     }
     
     if (button == &decDelayMin){
         int unit = getCurrentTimeUnit();
-        float factor = getFactor(unit, min);
-        float addDelayInSamples = convertToSamples(unit, factor);
+        double factor = getFactor(unit, min);
+        double addDelayInSamples = convertToSamples(unit, factor);
         incDecDelay(addDelayInSamples, plusMinus::dec);
         updateLabels();
 
@@ -291,29 +291,29 @@ void TheDelayAudioProcessorEditor::buttonClicked(Button* button)
 
     if (button == &incDelayMid) {
         int unit = getCurrentTimeUnit();
-        float factor = getFactor(unit, min);
-        float addDelayInSamples = convertToSamples(unit, factor * 10);
+        double factor = getFactor(unit, min);
+        double addDelayInSamples = convertToSamples(unit, factor * 10);
         incDecDelay(addDelayInSamples, plusMinus::inc);
         updateLabels();
     }
     if (button == &decDelayMid) {
         int unit = getCurrentTimeUnit();
-        float factor = getFactor(unit, min);
-        float addDelayInSamples = convertToSamples(unit, factor * 10);
+        double factor = getFactor(unit, min);
+        double addDelayInSamples = convertToSamples(unit, factor * 10);
         incDecDelay(addDelayInSamples, plusMinus::dec);
         updateLabels();
     }
     if (button == &incDelayMax) {
         int unit = getCurrentTimeUnit();
-        float factor = getFactor(unit, min);
-        float addDelayInSamples = convertToSamples(unit, factor * 100);
+        double factor = getFactor(unit, min);
+        double addDelayInSamples = convertToSamples(unit, factor * 100);
         incDecDelay(addDelayInSamples, plusMinus::inc);
         updateLabels();
     }
     if (button == &decDelayMax) {
         int unit = getCurrentTimeUnit();
-        float factor = getFactor(unit, min);
-        float addDelayInSamples = convertToSamples(unit, factor * 100);
+        double factor = getFactor(unit, min);
+        double addDelayInSamples = convertToSamples(unit, factor * 100);
         incDecDelay(addDelayInSamples, plusMinus::dec);
         updateLabels();
     }
@@ -395,13 +395,13 @@ void TheDelayAudioProcessorEditor::mouseExit(const MouseEvent& e){
 }
 
 void TheDelayAudioProcessorEditor::textEditorReturnKeyPressed(TextEditor &t){
-    float addTime;
-    float oldDelay = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
-    //float addTime = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::addTime);
+    double addTime;
+    double oldDelay = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
+    //double addTime = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::addTime);
     String text;
     text = addDelayEditor.getText();
-    bool isFloat = TheDelayAudioProcessorEditor::isFloat(text);
-    if (isFloat)
+    bool isDouble = TheDelayAudioProcessorEditor::isDouble(text);
+    if (isDouble)
         addTime = std::stof(text.toStdString());
         
     else
@@ -454,10 +454,10 @@ void TheDelayAudioProcessorEditor::textEditorFocusLost(TextEditor &t){
 }
 
 
-void TheDelayAudioProcessorEditor::incDecDelay(float samples, int incDec) {
-    int factor;
-    float currentDelay;
-    float newDelay;
+void TheDelayAudioProcessorEditor::incDecDelay(double samples, int incDec) {
+    int factor = 0;                 // shouldn't matter if not initialized
+    double currentDelay = 0;        // shouldn't matter if not initialized
+    double newDelay = 0;            // shouldn't matter if not initialized
     // Determining whether the delay should be increased or decreased
     switch (incDec) {
         case plusMinus::inc:
@@ -473,16 +473,17 @@ void TheDelayAudioProcessorEditor::incDecDelay(float samples, int incDec) {
     
     currentDelay = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
     newDelay = currentDelay + samples * factor;
+    newDelay = round(newDelay);                 // fixed the "Samples on ms up down" issue
     setDelayTime(newDelay);
     //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, newDelay);
 }
 
 // ===================== HELPER == FUNCTIONS =======================
 /// converts from samples, ms and meters to samples
-float TheDelayAudioProcessorEditor::convertToSamples(int unit, float value)
+double TheDelayAudioProcessorEditor::convertToSamples(int unit, double value)
 {
-    float delayInSamples;
-    float sampleRate = (float) getAudioProcessor()->getSampleRate();
+    double delayInSamples;
+    double sampleRate = getAudioProcessor()->getSampleRate();
     switch (unit) {
         case TheDelayAudioProcessor::timeUnits::samples:
             delayInSamples = roundf(value);
@@ -504,7 +505,7 @@ int TheDelayAudioProcessorEditor::getCurrentTimeUnit()
     return getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::timeUnitParam);
 }
 
-float TheDelayAudioProcessorEditor::getDelayLength()
+double TheDelayAudioProcessorEditor::getDelayLength()
 {
     return getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
 }
@@ -514,7 +515,7 @@ void TheDelayAudioProcessorEditor::setDelayTime(int samples){
 }
 
 
-float TheDelayAudioProcessorEditor::getFactor(int unit, int strength){
+double TheDelayAudioProcessorEditor::getFactor(int unit, int strength){
     switch (unit) {
         case TheDelayAudioProcessor::timeUnits::samples:
             switch (strength) {

@@ -79,13 +79,13 @@ public:
    
     String trackname;
     double sampleRate;
-    float delayLength;
-    float addTimeToDelay;
+    double delayLength;
+    double addTimeToDelay;
     int delayBufferLength;
     timeUnits currentTimeSetting;
     timeUnits getCurrentTimeSetting();
     void setCurrentTimeSetting(timeUnits unit);
-    void setDelayTime(float delayTime, timeUnits unit);
+    void setDelayTime(double delayTime, timeUnits unit);
 
 private:
     // circular buffer variables
