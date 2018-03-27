@@ -1,6 +1,6 @@
 # Mac
-.DS_Store
-.jpg
+*.DS_Store
+*.jpg
 
 # Folders
 /[Bb]uilds/
