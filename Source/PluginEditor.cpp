@@ -208,7 +208,7 @@ void TestPluginAudioProcessorEditor::labelTextChanged(Label* label)
 {
     int sampleRate = getAudioProcessor()->getSampleRate();
     if(label == &msLabel){
-        float delayTime = 0.0;
+        double delayTime = 0.0;
         String text = msLabel.getText();
         bool isFloat = TestPluginAudioProcessorEditor::isFloat(text);
         
@@ -222,7 +222,7 @@ void TestPluginAudioProcessorEditor::labelTextChanged(Label* label)
     }
 
     if(label == &samplesLabel){
-        float delayTime = 0.0;
+        double delayTime = 0.0;
         String text = samplesLabel.getText();
         bool isFloat = (text.toStdString().find_first_not_of( "0123456789" ) == std::string::npos);
         // IF ENTERED TEXT IS VALID
@@ -236,14 +236,15 @@ void TestPluginAudioProcessorEditor::labelTextChanged(Label* label)
     }
 
     if(label == &meterLabel){
-        float delayTime = 0.0;
+        double delayTime = 0.0;
         String text = meterLabel.getText();
         bool isFloat = TestPluginAudioProcessorEditor::isFloat(text);
         // IF ENTERED TEXT IS VALID
         if (isFloat)
         {
             delayTime = std::stof(text.toStdString());
-            setDelayTime(delayTime * sampleRate / 1000 * (100/343));
+            delayTime = delayTime * (double) sampleRate / 343.0;
+            setDelayTime(delayTime);
             //getAudioProcessor()->setParameter(TestPluginAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000 * (100/343));
         }
         updateLabels();
