@@ -311,13 +311,13 @@
  #define JucePlugin_Enable_IAA             0
 #endif
 #ifndef  JucePlugin_Name
- #define JucePlugin_Name                   "TestPlugin"
+ #define JucePlugin_Name                   "TheDelay"
 #endif
 #ifndef  JucePlugin_Desc
- #define JucePlugin_Desc                   "TestPlugin"
+ #define JucePlugin_Desc                   "TheDelay"
 #endif
 #ifndef  JucePlugin_Manufacturer
- #define JucePlugin_Manufacturer           "yourcompany"
+ #define JucePlugin_Manufacturer           "marinegrau"
 #endif
 #ifndef  JucePlugin_ManufacturerWebsite
  #define JucePlugin_ManufacturerWebsite    ""
@@ -368,16 +368,16 @@
  #define JucePlugin_AUSubType              JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_AUExportPrefix
- #define JucePlugin_AUExportPrefix         TestPluginAU
+ #define JucePlugin_AUExportPrefix         TheDelayAU
 #endif
 #ifndef  JucePlugin_AUExportPrefixQuoted
- #define JucePlugin_AUExportPrefixQuoted   "TestPluginAU"
+ #define JucePlugin_AUExportPrefixQuoted   "TheDelayAU"
 #endif
 #ifndef  JucePlugin_AUManufacturerCode
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
 #endif
 #ifndef  JucePlugin_CFBundleIdentifier
- #define JucePlugin_CFBundleIdentifier     com.yourcompany.TestPlugin
+ #define JucePlugin_CFBundleIdentifier     com.marinegrau.TheDelay
 #endif
 #ifndef  JucePlugin_RTASCategory
  #define JucePlugin_RTASCategory           ePlugInCategory_None
@@ -395,7 +395,7 @@
  #define JucePlugin_RTASDisableMultiMono   0
 #endif
 #ifndef  JucePlugin_AAXIdentifier
- #define JucePlugin_AAXIdentifier          com.yourcompany.TestPlugin
+ #define JucePlugin_AAXIdentifier          com.marinegrau.TheDelay
 #endif
 #ifndef  JucePlugin_AAXManufacturerCode
  #define JucePlugin_AAXManufacturerCode    JucePlugin_ManufacturerCode
@@ -419,5 +419,5 @@
  #define JucePlugin_IAASubType             JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_IAAName
- #define JucePlugin_IAAName                "yourcompany: TestPlugin"
+ #define JucePlugin_IAAName                "marinegrau: TheDelay"
 #endif
