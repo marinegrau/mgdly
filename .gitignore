@@ -1,0 +1,8 @@
+# Mac
+.DS_Store
+*.jpg
+
+# Folders
+Builds/
+JuceLibraryCode/
+/Test/
