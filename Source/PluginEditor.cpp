@@ -89,7 +89,7 @@ TheDelayAudioProcessorEditor::TheDelayAudioProcessorEditor (TheDelayAudioProcess
     samplesTextLabel.setBounds(125, 40, 100, 40);
     samplesTextLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     
-    msTextLabel.setText("milliseconds", dontSendNotification);
+    msTextLabel.setText("ms", dontSendNotification);
     msTextLabel.setBounds(125, 90, 100, 40);
     msTextLabel.setColour(juce::Label::ColourIds::textColourId, TheDelayAudioProcessorEditor::labelTextColour);
     
@@ -271,6 +271,14 @@ void TheDelayAudioProcessorEditor::updateLabels(){
     samplesLabel.setText((String)delayInSamples, dontSendNotification);
     msLabel.setText((String) delayInMs, dontSendNotification);
     meterLabel.setText((String) delayInMeters, dontSendNotification);
+    
+    double inaccuracy = (delayInMs * sampleRate / 1000) - round(delayInSamples);
+    
+    if (inaccuracy < -0.5 || inaccuracy > 0.5) {
+        msTextLabel.setText("ms*", dontSendNotification);
+    } else {
+        msTextLabel.setText("ms", dontSendNotification);
+    }
 }
 
 
