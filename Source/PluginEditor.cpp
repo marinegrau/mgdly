@@ -214,7 +214,8 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
         text = text.replaceCharacter(',', '.');
         if (isDouble) {  // IF TEXT IS A VALID ENTRY
             delayTime = std::stof(text.toStdString()); // set Delaytime to the entered number
-            int delayInSamples = round(delayTime * sampleRate / 1000);
+            int delayInSamples = delayTime * sampleRate / 1000;
+            //int delayInSamples = round(delayTime * sampleRate / 1000);
             setDelayTime(delayInSamples);
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000);
         }
@@ -231,7 +232,7 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
         // IF ENTERED TEXT IS VALID
         if (isDouble) {
             delayTime = std::stof(text.toStdString());
-            delayTime = round(delayTime);
+            //delayTime = round(delayTime);
             setDelayTime(delayTime);
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime);
         }
@@ -248,7 +249,8 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
         if (isDouble)
         {
             delayTime = std::stof(text.toStdString());
-            int delayInSamples = round(delayTime * sampleRate / 1000 * (100/343));
+            int delayInSamples = delayTime * sampleRate / 1000 * (100/343);
+            //int delayInSamples = round(delayTime * sampleRate / 1000 * (100/343));
             setDelayTime(delayInSamples);
             
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000 * (100/343));
@@ -480,7 +482,7 @@ void TheDelayAudioProcessorEditor::incDecDelay(double samples, int incDec) {
     
     currentDelay = getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
     newDelay = currentDelay + samples * factor;
-    newDelay = round(newDelay);                 // fixed the "Samples on ms up down" issue
+    //newDelay = round(newDelay);                 // fixed the "Samples on ms up down" issue
     setDelayTime(newDelay);
     //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, newDelay);
 }
@@ -517,7 +519,7 @@ double TheDelayAudioProcessorEditor::getDelayLength()
     return getAudioProcessor()->getParameter(TheDelayAudioProcessor::Parameters::delayLengthParam);
 }
 
-void TheDelayAudioProcessorEditor::setDelayTime(int samples){
+void TheDelayAudioProcessorEditor::setDelayTime(double samples){
     getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, samples);
 }
 

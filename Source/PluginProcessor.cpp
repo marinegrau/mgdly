@@ -91,10 +91,12 @@ void TheDelayAudioProcessor::setParameter (int index, float newValue)
             else
                 delayLength = newValue;
             
-            delayReadPosition = (int) (delayWritePosition - (delayLength) + delayBufferLength) % delayBufferLength;
+            delayReadPosition = (int) (delayWritePosition - (round(delayLength)) + delayBufferLength) % delayBufferLength;
             break;
+            
         case addTime:
             addTimeToDelay = newValue;
+        
         case timeUnitParam:
             int index2 = (int) newValue;
             switch (index2) {

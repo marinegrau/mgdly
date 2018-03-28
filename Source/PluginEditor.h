@@ -101,7 +101,7 @@ private:
     double getFactor(int unit, int strength);
     bool isDouble(String text);
     int countCharOccurencesInString(String string, char a);
-    void setDelayTime(int samples);
+    void setDelayTime(double samples);
     void updateTimeLabelColours();
 
 };
