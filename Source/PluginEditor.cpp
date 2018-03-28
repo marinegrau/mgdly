@@ -211,10 +211,11 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
         double delayTime = 0.0;
         String text = msLabel.getText();
         bool isDouble = TheDelayAudioProcessorEditor::isDouble(text);
-        
+        text = text.replaceCharacter(',', '.');
         if (isDouble) {  // IF TEXT IS A VALID ENTRY
             delayTime = std::stof(text.toStdString()); // set Delaytime to the entered number
-            setDelayTime(delayTime * sampleRate / 1000);
+            int delayInSamples = round(delayTime * sampleRate / 1000);
+            setDelayTime(delayInSamples);
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000);
         }
         updateLabels();
@@ -224,10 +225,13 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
     if(label == &samplesLabel){
         double delayTime = 0.0;
         String text = samplesLabel.getText();
-        bool isDouble = (text.toStdString().find_first_not_of( "0123456789" ) == std::string::npos);
+        //bool isDouble = (text.toStdString().find_first_not_of( "0123456789" ) == std::string::npos);
+        bool isDouble = TheDelayAudioProcessorEditor::isDouble(text);
+        text = text.replaceCharacter(',', '.');
         // IF ENTERED TEXT IS VALID
         if (isDouble) {
             delayTime = std::stof(text.toStdString());
+            delayTime = round(delayTime);
             setDelayTime(delayTime);
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime);
         }
@@ -239,11 +243,14 @@ void TheDelayAudioProcessorEditor::labelTextChanged(Label* label)
         double delayTime = 0.0;
         String text = meterLabel.getText();
         bool isDouble = TheDelayAudioProcessorEditor::isDouble(text);
+        text = text.replaceCharacter(',', '.');
         // IF ENTERED TEXT IS VALID
         if (isDouble)
         {
             delayTime = std::stof(text.toStdString());
-            setDelayTime(delayTime * sampleRate / 1000 * (100/343));
+            int delayInSamples = round(delayTime * sampleRate / 1000 * (100/343));
+            setDelayTime(delayInSamples);
+            
             //getAudioProcessor()->setParameter(TheDelayAudioProcessor::Parameters::delayLengthParam, delayTime * sampleRate / 1000 * (100/343));
         }
         updateLabels();
