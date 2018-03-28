@@ -61,7 +61,7 @@ public:
     void setCurrentProgram (int index) override;
     const String getProgramName (int index) override;
     void changeProgramName (int index, const String& newName) override;
-    void getDelayLength();
+    //void getDelayLength();
     int getDelayBufferLength();
     void setDelayLength(int unit, float delayTime);
     
@@ -85,7 +85,7 @@ public:
     timeUnits currentTimeSetting;
     timeUnits getCurrentTimeSetting();
     void setCurrentTimeSetting(timeUnits unit);
-    void setDelayTime(double delayTime, timeUnits unit);
+    //void setDelayTime(double delayTime, timeUnits unit);
 
 private:
     // circular buffer variables
